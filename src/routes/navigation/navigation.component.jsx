@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { signOutUser } from "../../utils/firebase/firebase";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import CartIcon from "../../components/cart-icon/CartIcon";
 import CartDowndown from "../../components/cart-dropdown/CartDowndown";
@@ -20,9 +20,11 @@ import {
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
+  const navigate = useNavigate();
   const logOut = async () => {
     try {
       await signOutUser();
+      navigate("/auth");
     } catch (error) {}
   };
   return (
